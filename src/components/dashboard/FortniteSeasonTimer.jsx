@@ -65,7 +65,7 @@ export default function FortniteSeasonTimer() {
 
     if (loading) {
         return (
-            <div className="lg:row-span-2 rounded-3xl bg-[#0e161b] text-white shadow-card p-8 flex flex-col justify-between relative overflow-hidden h-full animate-pulse">
+            <div className="lg:row-span-2 rounded-3xl bg-[var(--color-surface)] dark:bg-[var(--color-surface)] text-[var(--color-text-main)] shadow-card p-8 flex flex-col justify-between relative overflow-hidden h-full animate-pulse border border-[var(--color-border)]">
                 <div className="relative z-10 w-10 h-10 bg-gray-800 rounded-xl mb-8"></div>
                 <div className="relative z-10 flex flex-col items-center gap-4">
                     <div className="w-32 h-16 bg-gray-800 rounded-2xl"></div>

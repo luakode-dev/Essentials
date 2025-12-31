@@ -72,24 +72,24 @@ export default function WeekendTimer() {
             <div className="my-auto">
                 <div className="flex items-center justify-between gap-2 md:gap-4">
                     <div className="flex flex-col items-center">
-                        <span className="text-4xl lg:text-5xl font-bold text-[#0e161b] dark:text-[var(--color-text-main)] tabular-nums">{timeLeft.d}</span>
+                        <span className="text-4xl lg:text-5xl font-bold text-[var(--color-text-main)] tabular-nums">{timeLeft.d}</span>
                         <span className="text-xs text-gray-400 dark:text-[var(--color-text-muted)] uppercase font-bold tracking-wider">Días</span>
                     </div>
                     <div className="h-10 w-px bg-gray-100 dark:bg-[var(--color-border)]"></div>
                     <div className="flex flex-col items-center">
-                        <span className="text-4xl lg:text-5xl font-bold text-[#0e161b] dark:text-[var(--color-text-main)] tabular-nums">{timeLeft.h}</span>
+                        <span className="text-4xl lg:text-5xl font-bold text-[var(--color-text-main)] tabular-nums">{timeLeft.h}</span>
                         <span className="text-xs text-gray-400 dark:text-[var(--color-text-muted)] uppercase font-bold tracking-wider">Horas</span>
                     </div>
                     <div className="h-10 w-px bg-gray-100 dark:bg-[var(--color-border)]"></div>
                     <div className="flex flex-col items-center">
-                        <span className="text-4xl lg:text-5xl font-bold text-[#0e161b] dark:text-[var(--color-text-main)] tabular-nums">{timeLeft.m}</span>
+                        <span className="text-4xl lg:text-5xl font-bold text-[var(--color-text-main)] tabular-nums">{timeLeft.m}</span>
                         <span className="text-xs text-gray-400 dark:text-[var(--color-text-muted)] uppercase font-bold tracking-wider">Mins</span>
                     </div>
                 </div>
             </div>
             <div className="mt-4">
                 <div className="flex justify-between items-end mb-3">
-                    <h3 className="text-lg font-bold font-montserrat text-[#0e161b] dark:text-[var(--color-text-main)]">Fin de Semana</h3>
+                    <h3 className="text-lg font-bold font-montserrat text-[var(--color-text-main)]">Fin de Semana</h3>
                     <span className="text-sm font-bold text-gray-400 dark:text-[var(--color-text-muted)]">{Math.round(progress)}%</span>
                 </div>
                 <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">

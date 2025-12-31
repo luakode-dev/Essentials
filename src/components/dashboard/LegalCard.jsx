@@ -8,7 +8,6 @@ export default function LegalCard() {
                         <span className="material-symbols-outlined text-[20px]">grid_view</span>
                     </div>
                     <h2 className="text-sm font-bold tracking-widest text-[var(--color-text-main)] font-montserrat uppercase">Essentials</h2>
-                    <span className="w-8 h-[2px] bg-red-500 rounded-full opacity-60"></span>
                 </div>
 
                 <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed uppercase font-medium tracking-wide max-w-[450px]">
