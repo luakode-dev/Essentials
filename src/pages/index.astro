@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ThemeToggle from '../components/ThemeToggle';
+import DollarSection from '../components/dashboard/DollarSection';
+import FortniteSeasonTimer from '../components/dashboard/FortniteSeasonTimer';
+import LoLSeasonTimer from '../components/dashboard/LoLSeasonTimer';
+import ValorantSeasonCountdown from '../components/ValorantSeasonCountdown';
+import AddNew from '../components/dashboard/AddNew';
+import DevCard from '../components/dashboard/DevCard';
+import LegalCard from '../components/dashboard/LegalCard';
+
+const currentDate = new Date().toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+});
+---
+
+<Layout title="Essentials: Dólar y Temporizadores">
+	<header class="relative z-10 w-full px-6 md:px-8 py-6 flex items-center justify-between shrink-0 max-w-[1400px] mx-auto">
+		<div class="flex items-center gap-3">
+			<div class="flex items-center justify-center size-10 rounded-xl bg-primary/10 text-primary">
+				<span class="material-symbols-outlined text-[24px]">grid_view</span>
+			</div>
+			<h1 class="text-2xl font-bold tracking-tight text-[var(--color-text-main)] font-montserrat">Essentials</h1>
+		</div>
+		<div class="flex items-center gap-4">
+			<div class="flex items-center justify-center h-10 px-4 rounded-full bg-[var(--color-surface)] shadow-sm border border-[var(--color-border)] text-sm font-medium transition hover:bg-gray-50 dark:hover:bg-white/5 text-[var(--color-text-main)]">
+				<span class="material-symbols-outlined text-[18px] mr-2 text-[var(--color-text-muted)]">calendar_today</span>
+				<span class="truncate">{currentDate}</span>
+			</div>
+			<ThemeToggle client:load />
+		</div>
+	</header>
+
+	<main class="relative z-10 flex-1 w-full flex flex-col items-center pb-12">
+		<div class="w-full max-w-[1400px] px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(240px,auto)]">
+			<DollarSection client:load />
+
+			<ValorantSeasonCountdown client:load />
+
+			<FortniteSeasonTimer client:load />
+
+			<LoLSeasonTimer client:load />
+
+			<DevCard />
+
+			<LegalCard />
+
+			<AddNew />
+		</div>
+	</main>
+</Layout>

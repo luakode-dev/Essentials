@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #6366f1;
+  /* Indigo 500 */
+  --color-primary-soft: rgba(99, 102, 241, 0.1);
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text-main: #0f172a;
+  --color-text-muted: #64748b;
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+
+  --font-display: "Inter", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+:root.dark {
+  --color-primary: #818cf8;
+  --color-primary-soft: rgba(129, 140, 248, 0.15);
+  --color-background: #020617;
+  /* Slate 950 - Much deeper background */
+  --color-surface: #0f172a;
+  /* Slate 900 - Darker surfaces */
+  --color-border: #1e293b;
+  /* Slate 800 - Subtler borders */
+  --color-text-main: #f8fafc;
+  /* Keep crisp white-ish text */
+  --color-text-muted: #94a3b8;
+  /* Slate 400 */
+  --shadow-card: 0 20px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-background-light: var(--color-background);
+  --color-background-dark: var(--color-background);
+  --color-surface-dark: var(--color-surface);
+  --color-border-dark: var(--color-border);
+
+  --font-display: var(--font-display);
+  --font-montserrat: var(--font-montserrat);
+
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: var(--shadow-card);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+    scroll-behavior: smooth;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+  }
+}
+
+@layer utilities {
+  .bg-noise {
+    position: relative;
+  }
+
+  .bg-noise::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBGB1rgRMYhFg-uYBDCrg0KpP1fOHG3yZsuKkCAx1gvlJWgFu1Jfh73bO4te-6X49lc2bexH4MrOIztrpVDso7AvZBKeonu0_p8riWkoPUzFTMJ1RVgfpOEXog_vdoD-nylfppMCqaY5UqdU9jAjgY36jbxIInIrgyjET2cnvYvgXiMDd01gba6YcvHUiPGofJYfGjN7a7PUKM-_tNNBU2kjiJVKZ1UYUVABzOfc8KMk-t-augRkDHf8Ziwuby8XFglBPIqQJxsT_I);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  :is(.dark .glass-panel) {
+    background: rgba(17, 28, 33, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
