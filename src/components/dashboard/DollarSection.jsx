@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { refreshTrigger } from '../../stores/dollarStore';
+import { supabase } from '../../lib/supabase';
 import DollarCard from './DollarCard';
 import DollarHistoryCard from './DollarHistoryCard';
 
@@ -23,6 +24,20 @@ export default function DollarSection() {
 
                 setData({ bcv, paralelo });
                 setError(null);
+
+                // Guardar los datos en Supabase automáticamente de forma silenciosa
+                if (bcv?.promedio && paralelo?.promedio) {
+                    const today = new Date().toISOString().split('T')[0];
+                    const { error: upsertError } = await supabase
+                        .from('tasas_cambio')
+                        .upsert({
+                            date: today,
+                            bcv: bcv.promedio,
+                            paralelo: paralelo.promedio
+                        }, { onConflict: 'date' });
+
+                    if (upsertError) console.error("Error guardando tasa del día en Supabase:", upsertError);
+                }
             } catch (err) {
                 console.error(err);
                 setError('Error al cargar datos');

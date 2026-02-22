@@ -1,14 +1,43 @@
-import { useMemo } from 'react';
-
-const mockData = [
-    { day: 'Lunes', bcv: 58.20, paralelo: 62.50 },
-    { day: 'Martes', bcv: 58.40, paralelo: 63.20 },
-    { day: 'Miércoles', bcv: 58.50, paralelo: 64.10 },
-    { day: 'Jueves', bcv: 58.70, paralelo: 65.00 },
-    { day: 'Viernes', bcv: 58.90, paralelo: 63.50 },
-];
+import { useEffect, useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { supabase } from '../../lib/supabase';
 
 export default function DollarHistoryCard({ className = "" }) {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchHistory() {
+            setLoading(true);
+            try {
+                const { data: tasas, error } = await supabase
+                    .from('tasas_cambio')
+                    .select('date, bcv, paralelo')
+                    .order('date', { ascending: false })
+                    .limit(5);
+
+                if (error) throw error;
+
+                if (tasas) {
+                    // Ordenamos de antiguo a reciente, y formateamos el nombre del día
+                    const formatted = tasas.reverse().map(t => ({
+                        day: format(parseISO(t.date), 'EEEE', { locale: es }).replace(/^\w/, (c) => c.toUpperCase()),
+                        bcv: Number(t.bcv),
+                        paralelo: Number(t.paralelo)
+                    }));
+                    setData(formatted);
+                }
+            } catch (err) {
+                console.error("Error al cargar historial desde Supabase:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchHistory();
+    }, []);
+
     return (
         <div className={`rounded-3xl bg-[var(--color-surface)] shadow-card p-6 md:p-8 flex flex-col group transition-all hover:-translate-y-1 hover:shadow-xl duration-300 border border-[var(--color-border)] relative overflow-hidden h-full min-h-[300px] ${className}`}>
             <div className={`absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110 pointer-events-none`}></div>
@@ -38,7 +67,19 @@ export default function DollarHistoryCard({ className = "" }) {
                         </tr>
                     </thead>
                     <tbody className="text-[var(--color-text-main)] tabular-nums text-sm md:text-base">
-                        {mockData.map((d, i) => {
+                        {loading ? (
+                            <tr>
+                                <td colSpan="4" className="py-8 text-center text-[var(--color-text-muted)] animate-pulse">
+                                    Cargando historial...
+                                </td>
+                            </tr>
+                        ) : data.length === 0 ? (
+                            <tr>
+                                <td colSpan="4" className="py-8 text-center text-[var(--color-text-muted)]">
+                                    No hay datos históricos disponibles aún.
+                                </td>
+                            </tr>
+                        ) : data.map((d, i) => {
                             const diff = d.paralelo - d.bcv;
                             const diffPercent = (diff / d.bcv) * 100;
                             return (
