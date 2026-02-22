@@ -3,6 +3,87 @@ import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { supabase } from '../../lib/supabase';
 
+function SimpleChart({ data, type = 'both' }) {
+    if (!data || data.length < 2) return null;
+
+    const values = data.flatMap(d => type === 'both' ? [d.bcv, d.paralelo] : [d[type]]);
+    const min = Math.min(...values) * 0.95;
+    const max = Math.max(...values) * 1.05;
+    const range = max - min || 1;
+
+    const width = 280;
+    const height = 100;
+    const padding = 10;
+
+    const getX = (index) => padding + (index * (width - 2 * padding) / (data.length - 1));
+    const getY = (value) => height - padding - ((value - min) / range) * (height - 2 * padding);
+
+    const bcvPoints = data.map((d, i) => `${getX(i)},${getY(d.bcv)}`).join(' ');
+    const paraleloPoints = data.map((d, i) => `${getX(i)},${getY(d.paralelo)}`).join(' ');
+
+    const areaBcv = `${padding},${height - padding} ${bcvPoints} ${getX(data.length - 1)},${height - padding}`;
+    const areaParalelo = `${padding},${height - padding} ${paraleloPoints} ${getX(data.length - 1)},${height - padding}`;
+
+    return (
+        <div className="mt-4 relative">
+            <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-[100px] overflow-visible">
+                <defs>
+                    <linearGradient id="bcvGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+                    </linearGradient>
+                    <linearGradient id="paraleloGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#ef4444" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+                    </linearGradient>
+                </defs>
+
+                {(type === 'both' || type === 'bcv') && (
+                    <>
+                        <polygon points={areaBcv} fill="url(#bcvGradient)" />
+                        <polyline
+                            points={bcvPoints}
+                            fill="none"
+                            stroke="#22c55e"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </>
+                )}
+                {(type === 'both' || type === 'paralelo') && (
+                    <>
+                        <polygon points={areaParalelo} fill="url(#paraleloGradient)" />
+                        <polyline
+                            points={paraleloPoints}
+                            fill="none"
+                            stroke="#ef4444"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </>
+                )}
+            </svg>
+
+            <div className="flex justify-center gap-4 mt-2">
+                {type === 'both' && (
+                    <>
+                        <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                            <span className="text-xs text-[var(--color-text-muted)]">BCV</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span className="text-xs text-[var(--color-text-muted)]">Paralelo</span>
+                        </div>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
 export default function DollarHistoryCard({ className = "" }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -104,6 +185,9 @@ export default function DollarHistoryCard({ className = "" }) {
                         })}
                     </tbody>
                 </table>
+                {!loading && data.length >= 2 && (
+                    <SimpleChart data={data} type="both" />
+                )}
             </div>
         </div>
     );
