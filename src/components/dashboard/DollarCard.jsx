@@ -36,8 +36,8 @@ export default function DollarCard({
     const formattedTime = updatedAt ? format(new Date(updatedAt), 'h:mm a', { locale: es }) : '--';
 
     return (
-        <div className={`rounded-3xl bg-[var(--color-surface)] shadow-card p-8 flex flex-col justify-between group transition-all hover:-translate-y-1 hover:shadow-xl duration-300 border border-[var(--color-border)] relative overflow-hidden h-full ${className}`}>
-            <div className={`absolute top-0 right-0 w-64 h-64 ${t.bgBlob} rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110`}></div>
+        <div className={`rounded-3xl bg-[var(--color-surface)] shadow-card p-5 md:p-6 lg:p-7 flex flex-col justify-between group transition-all hover:-translate-y-1 hover:shadow-xl duration-300 border border-[var(--color-border)] relative overflow-hidden h-full ${className}`}>
+            <div className={`absolute top-0 right-0 w-48 h-48 md:w-56 md:h-56 ${t.bgBlob} rounded-bl-full -mr-12 -mt-12 md:-mr-16 md:-mt-16 transition-transform group-hover:scale-110`}></div>
 
             <div className="flex items-start justify-between relative z-10">
                 <div className="flex items-center gap-4">
@@ -50,17 +50,17 @@ export default function DollarCard({
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2 relative z-10 my-auto py-6">
+            <div className="flex flex-col gap-1 relative z-10 my-auto py-4 md:py-5">
                 <div className="flex items-baseline gap-2 flex-wrap">
-                    <h2 className="text-6xl lg:text-7xl font-bold text-[var(--color-text-main)] tracking-tighter font-montserrat tabular-nums">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text-main)] tracking-tighter font-montserrat tabular-nums">
                         {price?.toFixed(2) || '...'}
                     </h2>
-                    <p className="text-3xl text-gray-400 dark:text-gray-500 font-semibold">{currency}</p>
+                    <p className="text-xl md:text-2xl lg:text-3xl text-gray-400 dark:text-gray-500 font-semibold">{currency}</p>
                 </div>
             </div>
 
-            <div className="pt-6 relative z-10">
-                <div className="flex justify-between items-center text-sm text-[var(--color-text-muted)]">
+            <div className="pt-4 md:pt-5 relative z-10">
+                <div className="flex justify-between items-center text-xs md:text-sm text-[var(--color-text-muted)]">
                     <span>Actualizado</span>
                     <span className="font-medium text-[var(--color-text-main)]">{formattedTime}</span>
                 </div>

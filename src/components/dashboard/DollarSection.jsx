@@ -58,7 +58,7 @@ export default function DollarSection() {
                 price={data.bcv?.promedio}
                 updatedAt={data.bcv?.fechaActualizacion}
                 theme="green"
-                className="md:col-span-2"
+                className="md:col-span-1 lg:col-span-1"
             />
 
             <DollarCard
@@ -66,7 +66,7 @@ export default function DollarSection() {
                 price={data.paralelo?.promedio}
                 updatedAt={data.paralelo?.fechaActualizacion}
                 theme="red"
-                className="md:col-span-2"
+                className="md:col-span-1 lg:col-span-1"
             />
 
             <DollarCard
