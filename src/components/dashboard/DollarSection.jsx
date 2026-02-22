@@ -74,7 +74,15 @@ export default function DollarSection() {
                 price={data.paralelo?.promedio && data.bcv?.promedio ? data.paralelo.promedio - data.bcv.promedio : null}
                 updatedAt={data.bcv?.fechaActualizacion}
                 theme="blue"
-                className="md:col-span-2"
+                className="md:col-span-1"
+            />
+
+            <DollarCard
+                title="Promedio"
+                price={data.paralelo?.promedio && data.bcv?.promedio ? (data.paralelo.promedio + data.bcv.promedio) / 2 : null}
+                updatedAt={data.bcv?.fechaActualizacion}
+                theme="yellow"
+                className="md:col-span-1"
             />
 
             <DollarHistoryCard className="md:col-span-2 lg:col-span-2 md:row-span-2" />

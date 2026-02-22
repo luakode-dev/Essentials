@@ -28,6 +28,12 @@ export default function DollarCard({
             textIcon: "text-blue-600 dark:text-blue-400",
             bgBlob: "bg-blue-500/10",
             icon: "compare_arrows"
+        },
+        yellow: {
+            bgIcon: "bg-yellow-50 dark:bg-yellow-900/20",
+            textIcon: "text-yellow-600 dark:text-yellow-400",
+            bgBlob: "bg-yellow-500/10",
+            icon: "trending_flat"
         }
     };
 
