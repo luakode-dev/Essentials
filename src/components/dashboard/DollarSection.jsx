@@ -41,7 +41,6 @@ export default function DollarSection() {
                 title="Tasa Oficial (BCV)"
                 price={data.bcv?.promedio}
                 updatedAt={data.bcv?.fechaActualizacion}
-                trend={0.12} // API doesn't provide trend yet, keeping static for design, or calculate if history available
                 theme="green"
                 className="md:col-span-2"
             />
@@ -50,8 +49,15 @@ export default function DollarSection() {
                 title="Dólar Paralelo"
                 price={data.paralelo?.promedio}
                 updatedAt={data.paralelo?.fechaActualizacion}
-                trend={-0.05}
                 theme="red"
+                className="md:col-span-2"
+            />
+
+            <DollarCard
+                title="Diferencia (Brecha)"
+                price={data.paralelo?.promedio && data.bcv?.promedio ? data.paralelo.promedio - data.bcv.promedio : null}
+                updatedAt={data.bcv?.fechaActualizacion}
+                theme="blue"
                 className="md:col-span-2"
             />
         </>

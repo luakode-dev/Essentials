@@ -56,9 +56,13 @@ const currentDate = new Date().toLocaleDateString("en-US", {
 
 			<ValorantSeasonCountdown client:load />
 
-			<FortniteSeasonTimer client:load />
+			<div class="hidden">
+				<FortniteSeasonTimer client:load />
+			</div>
 
-			<LoLSeasonTimer client:load />
+			<div class="hidden">
+				<LoLSeasonTimer client:load />
+			</div>
 
 			<DevCard />
 
