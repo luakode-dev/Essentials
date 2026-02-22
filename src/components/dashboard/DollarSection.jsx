@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { refreshTrigger } from '../../stores/dollarStore';
 import DollarCard from './DollarCard';
+import DollarHistoryCard from './DollarHistoryCard';
 
 export default function DollarSection() {
     const trigger = useStore(refreshTrigger);
@@ -60,6 +61,8 @@ export default function DollarSection() {
                 theme="blue"
                 className="md:col-span-2"
             />
+
+            <DollarHistoryCard className="md:col-span-2" />
         </>
     );
 }
