@@ -37,8 +37,6 @@ export default function DollarCard({
 
     return (
         <div className={`rounded-3xl bg-[var(--color-surface)] shadow-card p-5 md:p-6 lg:p-7 flex flex-col justify-between group transition-all hover:-translate-y-1 hover:shadow-xl duration-300 border border-[var(--color-border)] relative overflow-hidden h-full ${className}`}>
-            <div className={`absolute top-0 right-0 w-48 h-48 md:w-56 md:h-56 ${t.bgBlob} rounded-bl-full -mr-12 -mt-12 md:-mr-16 md:-mt-16 transition-transform group-hover:scale-110`}></div>
-
             <div className="flex items-start justify-between relative z-10">
                 <div className="flex items-center gap-4">
                     <div className={`p-3 ${t.bgIcon} rounded-2xl ${t.textIcon}`}>

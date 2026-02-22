@@ -77,7 +77,7 @@ export default function DollarSection() {
                 className="md:col-span-2"
             />
 
-            <DollarHistoryCard className="md:col-span-2" />
+            <DollarHistoryCard className="md:col-span-2 lg:col-span-2 md:row-span-2" />
         </>
     );
 }

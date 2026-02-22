@@ -40,8 +40,6 @@ export default function DollarHistoryCard({ className = "" }) {
 
     return (
         <div className={`rounded-3xl bg-[var(--color-surface)] shadow-card p-5 md:p-6 lg:p-7 flex flex-col group transition-all hover:-translate-y-1 hover:shadow-xl duration-300 border border-[var(--color-border)] relative overflow-hidden h-full min-h-[250px] ${className}`}>
-            <div className={`absolute top-0 right-0 w-48 h-48 md:w-56 md:h-56 bg-purple-500/10 rounded-bl-full -mr-12 -mt-12 md:-mr-16 md:-mt-16 transition-transform group-hover:scale-110 pointer-events-none`}></div>
-
             <div className="flex items-start justify-between relative z-10 mb-6">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-2xl text-purple-600 dark:text-purple-400">
